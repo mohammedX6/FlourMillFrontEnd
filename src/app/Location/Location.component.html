@@ -1,0 +1,134 @@
+<html >
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a [routerLink]="['/nav']"  class="navbar-brand" href="#">FlourMill</a>
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+
+  
+  <ul  class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link" [routerLink]="['/requests']" routerLinkActive="active">Requests</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/products']" routerLinkActive="active">Products Managements</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/truckdrivermang']" routerLinkActive="active">Truck Driver Managment</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/location']" routerLinkActive="active">Track Shipments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/reports']" routerLinkActive="active">Reports</a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link " [routerLink]="['/sales']" routerLinkActive="active">Sales</a>
+      </li>
+   
+    </ul>
+
+    <div *ngIf="loggedIn()" class="dropdown" dropdown>
+        <a class="  dropdown-toggle text-light" dropdownToggle>
+        Welcome  {{authService.decodedToken?.unique_name}}
+        </a>
+        <div class="dropdown-menu mt-3" *dropdownMenu>
+          <a class="dropdown-item" href="#"><i class="fa fa-user" ></i>Edit Profile</a>
+  
+          <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out" ></i>Logout</a>
+        </div>
+      </div>
+  
+      <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+        <input class="form-control mr-sm-2" type="text" name="username" required placeholder="Username" [(ngModel)]="model.username">
+        <input class="form-control mr-sm-2" type="password" name="password" required placeholder="Password" [(ngModel)]="model.password">
+        <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+      </form>
+  
+</nav>
+
+        <div class="row">
+          <agm-map id="map"
+          
+          [latitude]="lat"
+          [longitude]="lng"
+          [zoom]="zoom"
+          [disableDefaultUI]="false"
+          [zoomControl]="false"
+          >
+        
+          <agm-marker 
+                 *ngFor="let m of items | async"
+             
+              [latitude]="m.geo_point.latitude"
+              [longitude]="m.geo_point.longitude"
+              [label]="m.user.username"
+       
+              >
+              <agm-info-window>
+              {{m.user.user_id}}
+           
+              
+              </agm-info-window>
+          
+            
+          </agm-marker>
+       
+          
+          <agm-circle [latitude]="lat + 0.3" [longitude]="lng" 
+              [radius]="5000"
+              [fillColor]="'red'"
+            
+           >
+          </agm-circle>
+
+        
+ 
+  
+          </agm-map>
+         
+            <div class="p-3 mb-2 bg-info text-white" style="height:520px; width: 570px;">
+                <h2 style="text-align: center;  font-family: 'Nunito', sans-serif;">List of active Shipments</h2>
+                <ul style="font-size: 25px; list-style-type: none; text-align: center;  font-family: 'Nunito', sans-serif;">
+                  <li *ngFor="let item of items | async">
+
+                    <button #pRef type="button" (click)="onClick(item)" class="btn btn-secondary btn-xl">  {{ item.user.username }} </button>
+                    
+                   
+          <br><br>
+
+                  </li>
+
+               
+                    
+
+                  </ul>
+                
+
+                  <div id="123" class="card">
+                    <div class="container">
+                     
+                        <h4 style="color: mediumspringgreen;" ><b> {{checkstatues(items2.order.orderStatues) }}.</b></h4> 
+                        <h4><b>Shimpment Price: {{items2.order.shipmentPrice}}.</b></h4> 
+                        <h4><b>Total Payment: {{items2.order.totalPayment}}.</b></h4>
+                        <h4><b>Total Tons: {{items2.order.totalTons}}.</b></h4>
+                        <h4><b>Order Date: {{items2.order.order_Date}}.</b></h4>
+                        <h4><b>Customr Name {{items2.order.customerName}}.</b></h4>   
+                       
+                      </div>
+                     
+                  </div>
+                  </div>
+              </div> 
+            <br>
+            <br>
+
+        <div class="footer">
+          <div class="MyText">© 2020 Copyright: FlourMill.com</div>
+          
+          </div>
+
+       
+      
+
+</html>

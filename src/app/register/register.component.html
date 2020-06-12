@@ -1,0 +1,132 @@
+<html >
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a [routerLink]="['/nav']" class="navbar-brand" href="#">FlourMill</a>
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+
+  
+  <ul  class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link" [routerLink]="['/requests']" routerLinkActive="active">Requests</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/products']" routerLinkActive="active">Products Managements</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/truckdrivermang']" routerLinkActive="active">Truck Driver Managment</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/location']" routerLinkActive="active">Track Shipments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/reports']" routerLinkActive="active">Reports</a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link " [routerLink]="['/sales']" routerLinkActive="active">Sales</a>
+      </li>
+   
+    </ul>
+
+    <div *ngIf="loggedIn()" class="dropdown" dropdown>
+        <a class="  dropdown-toggle text-light" dropdownToggle>
+        Welcome  {{authService.decodedToken?.unique_name}}
+        </a>
+        <div class="dropdown-menu mt-3" *dropdownMenu>
+          <a class="dropdown-item" href="#"><i class="fa fa-user" ></i>Edit Profile</a>
+  
+          <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out" ></i>Logout</a>
+        </div>
+      </div>
+  
+      <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+        <input class="form-control mr-sm-2" type="text" name="username" required placeholder="Username" [(ngModel)]="model.username">
+        <input class="form-control mr-sm-2" type="password" name="password" required placeholder="Password" [(ngModel)]="model.password">
+        <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+      </form>
+  
+</nav>
+
+<div class="fullborder">
+  <article class="card-body mx-auto" style="max-width: 400px;">
+    <h4 class="card-title mt-3 text-center">Create Account</h4>
+    <p class="text-center">Get started with your free account</p>
+    <p>
+
+      <button type="button" class="btn btn-block btn-facebook" (click)="authService.FacebookAuth()"> <i class="fa fa-facebook-f"></i> Login via Facebook</button>
+    </p>
+    <p class="divider-text">
+          <span class="bg-light">OR</span>
+      </p>
+      <form #registeForm="ngForm" (ngSubmit)="register()">
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+       </div>
+          <input required type="text" name="username" class="form-control"   name="username" [(ngModel)]="model.username" placeholder="User Name">
+      </div> 
+
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+       </div>
+          <input  type="text" name="email" class="form-control" [(ngModel)]="model.email" placeholder="Email address" >
+      </div> 
+      
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+      </div>
+
+        <input name="phonenumber" class="form-control" [(ngModel)]="model.phonenumber" placeholder="Phone number" type="text">
+      </div> 
+
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-birthday-cake"></i> </span>
+       </div>
+
+          <input  type="text" name="birthdate" class="form-control" placeholder="Birth Date" [(ngModel)]="model.birthdate" >
+      </div> 
+
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-address-book"></i> </span>
+       </div>
+
+
+
+          <input  type="number" name="nationalid" class="form-control" placeholder="National ID" [(ngModel)]="model.nationalid" placeholder="National ID" >
+      </div> 
+
+
+
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-briefcase"></i></span>
+       </div>
+          <input  type="text" name="jobnumber" class="form-control" [(ngModel)]="model.jobnumber" placeholder="Job Number" >
+      </div> 
+
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+      </div>
+          <input class="form-control" name="password" [(ngModel)]="model.password" placeholder="Password" type="password">
+      </div> 
+                                     
+      <div class="form-group">
+          <button type="submit" name="signup_submit" value="Register" class="btn btn-primary btn-block"> Create Account </button>
+      </div>   
+                                                                  
+  </form>
+  </article>
+  
+  </div> 
+
+
+
+
+
+  
+</html>

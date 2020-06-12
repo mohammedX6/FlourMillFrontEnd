@@ -1,0 +1,126 @@
+
+<html >
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a [routerLink]="['/nav']" class="navbar-brand" href="#">FlourMill</a>
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+ 
+  
+  <ul  class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link" [routerLink]="['/requests']" routerLinkActive="active">Requests</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/products']" routerLinkActive="active">Products Managements</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/truckdrivermang']" routerLinkActive="active">Truck Driver Managment</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/location']" routerLinkActive="active">Track Shipments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/reports']" routerLinkActive="active">Reports</a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link " [routerLink]="['/sales']" routerLinkActive="active">Sales</a>
+      </li>
+   
+    </ul>
+
+    <div *ngIf="loggedIn()" class="dropdown" dropdown>
+        <a class="  dropdown-toggle text-light" dropdownToggle>
+        Welcome  {{authService.decodedToken?.unique_name}}
+        </a>
+        <div class="dropdown-menu mt-3" *dropdownMenu>
+          <a class="dropdown-item" href="#"><i class="fa fa-user" ></i>Edit Profile</a>
+  
+          <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out" ></i>Logout</a>
+        </div>
+      </div>
+  
+      <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+        <input class="form-control mr-sm-2" type="text" name="username" required placeholder="Username" [(ngModel)]="model.username">
+        <input class="form-control mr-sm-2" type="password" name="password" required placeholder="Password" [(ngModel)]="model.password">
+        <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+      </form>
+  
+</nav>
+
+
+<div class="text_right">
+  <button  (click)="Switch()"  hr class="btn btn-primary btn-lg mr-2" [routerLink]="['/home']"  routerLinkActive="active" >Switch to Supervisor</button> 
+</div>
+
+
+
+
+
+
+
+
+<p>
+
+</p>
+<div class="container" >
+  <div style="text-align: center;">
+  <p style="font-size: large"  class="text-light">Welcome Administrator</p>
+  <p *ngIf="!loggedIn()" style="font-size: large"  class="text-light">No account! Register</p>
+  <div class="text-center">
+    <button *ngIf="!loggedIn()"  hr class="btn btn-primary btn-lg mr-2" [routerLink]="['/register']"  routerLinkActive="active" >Register</button> 
+
+    <button class="btn btn-info btn-lg ">Learn more</button>
+  </div>
+</div>
+</div>
+
+<div *ngIf="!loggedIn()" class="fullborder">
+  <article class="card-body mx-auto" style="max-width: 400px;">
+    <p class="text-center">Or</p>
+    <p>
+
+      <button type="button" class="btn btn-block btn-facebook" (click)="authService.FacebookAuth()"> <i class="fa fa-facebook-f"></i> Login via Facebook</button>
+    </p>
+  </article>
+  </div> 
+
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-4">
+
+    </div>
+  </div>
+</div>
+
+<section class="section-steps" id="works">
+  <div class="row">
+      <h2>How it works &mdash; Simple as 1, 2, 3</h2>
+  </div>
+  <div class="row">
+      <div class="col span-1-of-2 steps-box">
+          <img src="assets/img/pixel.png" alt="app on android" class="app-screen js--wp-2">
+      </div>
+      <div class="col span-1-of-2 steps-box">
+          <div class="works-step clearfix">
+              <div>1</div>
+              <p>Download the app from Google Play.</p>
+          </div>
+          <div class="works-step clearfix">
+              <div>2</div>
+              <p>Sign up within seconds.</p>
+          </div>
+          <div class="works-step clearfix">
+              <div>3</div>
+              <p>Enjoy ordering your shipment in less than 5 minutes.</p>
+          </div>
+          
+<div class="links">
+    <div class="link1"> For truck drivers   <a href="https://play.google.com/store/apps/details?id=com.truckdriverco.truckdriver" class="btn-app"><img src="assets/img/download-app-android.png" alt="Play Store Button"></a> </div> <br>
+    <div class="link2">  For bakeries <a href="https://play.google.com/store/apps/details?id=com.flourmillco.flourmill_1" class="btn-app"><img src="assets/img/download-app-android.png" alt="Play Store Button"></a></div> 
+    </div>
+      </div>
+  </div>
+</section>
+</html>

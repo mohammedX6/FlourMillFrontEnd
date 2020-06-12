@@ -1,0 +1,166 @@
+
+<html >
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a [routerLink]="['/nav']" class="navbar-brand" href="#">FlourMill</a>
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+
+  
+  <ul  class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link" [routerLink]="['/requests']" routerLinkActive="active">Requests</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/products']" routerLinkActive="active">Products Managements</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/truckdrivermang']" routerLinkActive="active">Truck Driver Managment</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/location']" routerLinkActive="active">Track Shipments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/reports']" routerLinkActive="active">Reports</a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link " [routerLink]="['/sales']" routerLinkActive="active">Sales</a>
+      </li>
+   
+    </ul>
+
+    <div *ngIf="loggedIn()" class="dropdown" dropdown>
+        <a class="  dropdown-toggle text-light" dropdownToggle>
+        Welcome  {{authService.decodedToken?.unique_name}}
+        </a>
+        <div class="dropdown-menu mt-3" *dropdownMenu>
+          <a class="dropdown-item" href="#"><i class="fa fa-user" ></i>Edit Profile</a>
+  
+          <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out" ></i>Logout</a>
+        </div>
+      </div>
+  
+      <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+        <input class="form-control mr-sm-2" type="text" name="username" required placeholder="Username" [(ngModel)]="model.username">
+        <input class="form-control mr-sm-2" type="password" name="password" required placeholder="Password" [(ngModel)]="model.password">
+        <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+      </form>
+  
+</nav>
+
+<tabset class="member-tabset">
+  <tab heading="Add new Truck Driver">
+
+    <div class="card">
+     
+      <br>
+    
+        <form #addform="ngForm" id="addform" class="form-inline my-2 my-lg-0" id="editForm" (ngSubmit)="addTruck()">
+          <br>
+          <label class="name mr-sm-2" for="name">Truck Driver Job Number  </label>
+          <input type="number" id="s" class="form-control mr-sm-2" name="gensss" [(ngModel)]="rep">
+    
+     <button (click)="addTruck()" type="submit" form="addform" type="button" class="btn btn-lg btn-primary custom-b" >Add Truck Driver</button>  
+    </form>
+   <br>
+    </div>
+
+  </tab>
+  <tab heading="List of Truck Drivers">
+
+
+    <div class="tab">
+      <div class="card-body">
+        <div id="table" class="table-editable">
+    
+          <table class="table table-bordered table-responsive-md table-striped text-center">
+            <thead>
+              <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Phone Number</th>
+                <th class="text-center">Job Number</th>
+                <th class="text-center">National ID</th>
+                <th class="text-center">Edit Truck Driver Information</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of truckManageFull">
+    
+                <td class="pt-3-half">{{item?.id}}</td>
+                <td class="pt-3-half">{{item?.username}}</td>  
+                <td class="pt-3-half">{{item?.email}}</td>
+                <th class="pt-3-half">{{item?.phoneNumber}}</th>
+                <th class="pt-3-half">{{item?.nationalId}}</th>
+                <th class="pt-3-half">{{item?.jobNumber}}</th>
+                <a class="btn btn-default">
+                <span class="table-remove"><button type="button" class="btn btn-success" [routerLink]="['/TruckM/',item.id]">Edit Truck</button></span></a>
+              
+  
+    
+  </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  
+    
+    </div>
+
+  </tab>
+  <tab heading="Remove Truck Driver">
+
+    <div class="tab">
+      <div class="card-body">
+        <div id="table" class="table-editable">
+    
+          <table class="table table-bordered table-responsive-md table-striped text-center">
+            <thead>
+              <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">name</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of truckManage">
+    
+                <td class="pt-3-half">{{item?.id}}</td>
+                <td class="pt-3-half">{{item?.username}}</td>  
+                <td class="pt-3-half">{{item?.email}}</td>
+                <td (click)="DelAccountBakery(item.id)"> <span class="btn btn-danger">Delete</span>
+              
+  
+    </td>
+  </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  
+    
+    </div>
+
+  </tab>
+
+  
+  </tabset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,86 @@
+<html>
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+
+
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a [routerLink]="['/home']" class="navbar-brand" href="#">MIT</a>
+  
+  <ul class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link"[routerLink]="['/reports_supervisor']">Flour Mills Reports</a>
+      </li>
+     
+      <li class="nav-item">
+        <a class="nav-link " [routerLink]="['/sales_supervisor']">Flour Mills Sales</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/manage']">Account management</a>
+      </li>
+     
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/contact']">Contact Us</a>
+      </li>
+    </ul>
+
+    <div *ngIf="loggedIn()" class="dropdown" dropdown>
+      <a class="  dropdown-toggle text-light" dropdownToggle>
+      Welcome  {{authService.decodedToken?.unique_name}}
+      </a>
+      <div class="dropdown-menu mt-3" *dropdownMenu>
+        <a class="dropdown-item" href="#"><i class="fa fa-user" ></i>Edit Profile</a>
+
+        <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out" ></i>Logout</a>
+      </div>
+    </div>
+
+    <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+      <input class="form-control mr-sm-2" type="text" name="username" required placeholder="Username" [(ngModel)]="model.username">
+      <input class="form-control mr-sm-2" type="password" name="password" required placeholder="Password" [(ngModel)]="model.password">
+      <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+    </form>
+  
+</nav>
+
+
+<div class="card">
+  <h3 class="card-header text-center">Flour Mills Reports</h3>
+  <br>
+
+   
+ <div class="card-body">
+    <div id="table" class="table-editable">
+
+      <table class="table table-bordered table-responsive-md table-striped text-center">
+        <thead>
+          <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">Report Date</th>
+            <th class="text-center">Flour Mill</th>
+            <th class="text-center">Total Payment</th>
+            <th class="text-center">Total Tons</th>
+
+            <th class="text-center">Show</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let MyReport of reports async">
+
+            <td class="pt-3-half">{{MyReport?.id}}</td>
+            <td class="pt-3-half">{{MyReport?.report_Date}}</td>       
+            <td class="pt-3-half">{{MyReport?.flour_Mill_Name}}</td>    
+            <td class="pt-3-half">{{MyReport?.totalPayment}}</td>   
+            <td class="pt-3-half">{{MyReport?.totalBadgesForFlourMill}}</td>   
+            <td>
+                <a class="btn btn-default">
+                <span class="table-remove"><button type="button" class="btn btn-success" [routerLink]="['/reports_supervisor/',MyReport.id]">Show report</button></span></a>
+</td>
+ </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+</html >

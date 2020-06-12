@@ -1,0 +1,69 @@
+.html
+{
+    font-family: 'Nunito', sans-serif;
+
+}
+
+
+   agm-map {
+      height: 509px;
+      width: 800px;
+    }
+
+   .footer {
+    text-align:center;
+    height:50px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #343a40;
+    color: white;
+   
+
+ }
+ .Mycolumn
+ {
+    background: linear-gradient(to right, #0062E6, #33AEFF);
+    height: 550px;
+    width: 585px;
+    background-color: #343a40;
+ }
+ .MyText{
+
+    margin-top: 15px;
+
+
+ }
+ .btn-xl {
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    width:50%;
+}
+
+.card {
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+   transition: 0.3s;
+   width: 40%;
+   right: 230px;
+   bottom: 180px;
+   height: 200px;
+display: none;
+font-size: 150%;
+
+ }
+ 
+ .card:hover {
+   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+ }
+ 
+ .container {
+   padding: 2px 16px;
+   background: linear-gradient(to right, #0062E6, #33AEFF);
+   background-color: #343a40;
+
+
+  
+ }
+  

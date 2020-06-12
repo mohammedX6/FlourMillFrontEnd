@@ -1,0 +1,118 @@
+<html >
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a [routerLink]="['/nav']" class="navbar-brand" href="#">FlourMill</a>
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+
+  
+  <ul  class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link" [routerLink]="['/requests']" routerLinkActive="active">Requests</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/products']" routerLinkActive="active">Products Managements</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/truckdrivermang']" routerLinkActive="active">Truck Driver Managment</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/location']" routerLinkActive="active">Track Shipments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/reports']" routerLinkActive="active">Reports</a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link " [routerLink]="['/sales']" routerLinkActive="active">Sales</a>
+      </li>
+   
+    </ul>
+
+    <div *ngIf="loggedIn()" class="dropdown" dropdown>
+        <a class="  dropdown-toggle text-light" dropdownToggle>
+        Welcome  {{authService.decodedToken?.unique_name}}
+        </a>
+        <div class="dropdown-menu mt-3" *dropdownMenu>
+          <a class="dropdown-item" href="#"><i class="fa fa-user" ></i>Edit Profile</a>
+  
+          <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out" ></i>Logout</a>
+        </div>
+      </div>
+  
+      <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+        <input class="form-control mr-sm-2" type="text" name="username" required placeholder="Username" [(ngModel)]="model.username">
+        <input class="form-control mr-sm-2" type="password" name="password" required placeholder="Password" [(ngModel)]="model.password">
+        <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+      </form>
+  
+</nav>
+<br>
+<div style="text-align: center;">
+  <p style="font-size: large"  >New Requests</p>
+</div>
+
+
+<div class="tab">
+  
+    
+  <div class="card-body">
+    <div id="table" class="table-editable">
+
+      <table class="table table-bordered table-responsive-md table-striped text-center">
+        <thead>
+          <tr>
+            <th class="text-center">Order ID</th>
+            <th class="text-center">Order Date</th>
+            <th class="text-center">Total Tons</th>
+            <th class="text-center">Customer Name</th>
+            <th class="text-center">Destination</th>
+            <th class="text-center">Total Payment</th>
+            <th class="text-center">Order Comment</th>
+            <th class="text-center">Order Statues</th>
+            <th class="text-center">Accept Order</th>
+            <th class="text-center">Reject Order</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let item of requests">
+
+            <td class="pt-3-half">{{item?.id}}</td>
+            <td class="pt-3-half">{{item?.order_Date}}</td>  
+            <td class="pt-3-half">{{item?.totalTons}}</td>
+            <td class="pt-3-half">{{item?.customerName}}</td>
+            <td class="pt-3-half">{{item?.destination}}</td>
+            <td class="pt-3-half">{{item?.totalPayment}}</td>
+            <td class="pt-3-half">{{item?.orderComment}}</td>
+            <td class="pt-3-half">{{item?.orderStatues}}</td>
+
+            
+            <td><button class="btn btn-danger" [disabled]="checkRequest(item?.orderStatues)"  (click)="Accept(item.id)">Accept</button>
+            <td><button class="btn btn-danger" [disabled]="checkRequest(item?.orderStatues)" (click)="Reject(item.id)">Reject</button>
+            
+
+          
+
+</td>
+</tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-4">
+
+    </div>
+  </div>
+</div>
+
+
+
+</html>

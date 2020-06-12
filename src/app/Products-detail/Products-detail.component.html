@@ -1,0 +1,129 @@
+<html >
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a [routerLink]="['/nav']" class="navbar-brand" href="#">FlourMill</a>
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+
+  
+  <ul  class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link" [routerLink]="['/requests']" routerLinkActive="active">Requests</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/products']" routerLinkActive="active">Products Managements</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/truckdrivermang']" routerLinkActive="active">Truck Driver Managment</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/location']" routerLinkActive="active">Track Shipments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/reports']" routerLinkActive="active">Reports</a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link " [routerLink]="['/sales']" routerLinkActive="active">Sales</a>
+      </li>
+   
+    </ul>
+
+    <div *ngIf="loggedIn()" class="dropdown" dropdown>
+        <a class="  dropdown-toggle text-light" dropdownToggle>
+        Welcome  {{authService.decodedToken?.unique_name}}
+        </a>
+        <div class="dropdown-menu mt-3" *dropdownMenu>
+          <a class="dropdown-item" href="#"><i class="fa fa-user" ></i>Edit Profile</a>
+  
+          <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out" ></i>Logout</a>
+        </div>
+      </div>
+  
+      <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+        <input class="form-control mr-sm-2" type="text" name="username" required placeholder="Username" [(ngModel)]="model.username">
+        <input class="form-control mr-sm-2" type="password" name="password" required placeholder="Password" [(ngModel)]="model.password">
+        <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+      </form>
+  
+</nav>
+
+<div class="ng-container mt-4">
+<div class="row">
+
+  <div class="col-sm-4">
+
+    <div class="card">
+
+      <img class="card-img-top img-thumbnail" src="{{product?.url}}" alt="{{product?.badgeName}}">
+    <div class="card-body">
+      <div>
+<strong>Price</strong>
+      <p>{{product?.price}}
+      </p>
+      </div>
+      <div>
+        <strong>Badge Type</strong>
+        <p>{{product?.badgeType}}</p>
+      </div>
+      <div>
+        <strong>Production Date</strong>
+        <p>{{product?.productionDate}}</p>
+      </div>
+      <div>
+        <strong>Expire Date</strong>
+        <p>{{product?.expireDate}}</p>
+      </div>
+
+
+    </div>
+    <div class="card-footer"></div>
+    <div class="btn-group d-flex">
+      <button class="btn btn-primary w-100">Share on Facebook</button>
+      <button class="btn btn-success w-100">Share on Instgram</button>
+    </div>
+    </div>
+  </div>
+  <div class="col-sm-8">
+<div class="tab-panel">
+<tabset class="member-tabset">
+<tab heading="About {{product.badgeName}}">
+<h4>Description</h4>
+<p>{{product.productDescription}}</p>
+<h4>Usage</h4>
+<p>{{product.usage}}</p>
+</tab>
+<tab heading="Photos">
+  <ngx-gallery [options]="galleryOptions" [images]="gallaryImages"></ngx-gallery>
+</tab>
+<tab heading="Edit">
+
+  <form #editForm="ngForm" id="editForm" (ngSubmit)="updateProduct()">
+    <h4>Description</h4>
+    <textarea class="form-control" name="Dname" rows="6" 
+      [(ngModel)]="product.productDescription"></textarea>
+    <h4>Price</h4>
+    <textarea class="form-control" name="Pname" rows="6" 
+      [(ngModel)]="product.price"></textarea>
+      <h4>Badge Name</h4>
+      <textarea class="form-control" name="Bname" rows="6" 
+        [(ngModel)]="product.badgeName"></textarea>
+      <h4>Product Details:</h4>
+    <div class="form-inline">
+      <label for="city">Production Date</label>
+      <input type="text" class="form-control" name="Pdate" [(ngModel)]="product.productionDate">
+      <label for="country">Expire Date</label>
+      <input type="text" class="form-control" name="Edate" [(ngModel)]="product.expireDate">
+      <div class="card-footer">
+        <button  form="editForm" class="btn btn-success btn-block">Save Changes</button>
+    </div>
+    </div>
+    
+</form>
+
+</tab>
+</tabset>
+</div>
+  </div>
+</div>
+</div>
+

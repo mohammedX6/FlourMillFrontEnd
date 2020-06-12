@@ -1,0 +1,38 @@
+
+.custom{
+
+    width: 500px;
+    height: 500px;
+}
+.prdouctpart{
+
+    margin-left: 34%;
+    
+    position: absolute;
+
+  display: grid;
+    top: 180px;
+    bottom: 0px;
+    margin-top: 0;
+    margin-bottom: 50px;
+    display: grid;
+    grid-template-columns: 380px 380px 380px;
+   
+    padding: 5px;
+
+
+}
+#add
+{
+    width:100%;
+    
+}
+.hot
+{
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+    font-size: 40px;
+
+}
+
+

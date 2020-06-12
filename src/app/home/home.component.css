@@ -1,0 +1,23 @@
+html{
+    height:50em; 
+    background-size:cover;
+    width:auto;
+    background-image:url('amman2.jpg');
+    font-family: 'Nunito', sans-serif;
+
+    
+  }
+  .myCustom
+  {
+    padding-right: 22cm;
+    font-family: 'Nunito', sans-serif;
+
+  }
+  .text_right{
+
+    position: relative;
+    top:20px;
+    left:1680px;
+  
+  }
+  

@@ -1,0 +1,93 @@
+<html >
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a [routerLink]="['/nav']" class="navbar-brand" href="#">FlourMill</a>
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+
+  
+  <ul  class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link" [routerLink]="['/requests']" routerLinkActive="active">Requests</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/products']" routerLinkActive="active">Products Managements</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/truckdrivermang']" routerLinkActive="active">Truck Driver Managment</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/location']" routerLinkActive="active">Track Shipments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/reports']" routerLinkActive="active">Reports</a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link " [routerLink]="['/sales']" routerLinkActive="active">Sales</a>
+      </li>
+   
+    </ul>
+
+   
+  
+</nav>
+
+<div class="fullborder">
+  <article class="card-body mx-auto" style="max-width: 400px;">
+    <h4 class="card-title mt-3 text-center">One More Step</h4>
+    <p class="text-center">Before you login please fill your pesonal information</p>
+    <p>    </p>
+    <p class="divider-text">
+     
+      </p>
+      <form #registeForm="ngForm" (ngSubmit)="register()">
+   
+
+     
+      
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+      </div>
+        <input name="phonenumber" class="form-control" [(ngModel)]="model.phoneNumber" placeholder="Phone number" type="text">
+      </div> 
+
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-birthday-cake"></i> </span>
+       </div>
+
+          <input  type="text" name="birthdate" class="form-control" placeholder="Birth Date" [(ngModel)]="model.birthDate" >
+      </div> 
+
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-address-book"></i> </span>
+       </div>
+
+
+
+          <input  type="number" name="nationalid" class="form-control" placeholder="National ID" [(ngModel)]="model.nationalId" placeholder="National ID" >
+      </div> 
+
+
+
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-briefcase"></i></span>
+       </div>
+          <input  type="text" name="jobnumber" class="form-control" [(ngModel)]="model.jobNumber" placeholder="Job Number" >
+      </div> 
+
+    
+                                     
+      <div class="form-group">
+          <button type="submit" name="signup_submit" value="Register" class="btn btn-primary btn-block"> Create Account </button>
+      </div>   
+                                                                  
+  </form>
+  </article>
+  
+  </div> 
+  
+</html>

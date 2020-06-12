@@ -1,0 +1,129 @@
+<html >
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a [routerLink]="['/nav']" class="navbar-brand" href="#">FlourMill</a>
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
+
+  
+  <ul  class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link" [routerLink]="['/requests']" routerLinkActive="active">Requests</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/products']" routerLinkActive="active">Products Managements</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/truckdrivermang']" routerLinkActive="active">Truck Driver Managment</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/location']" routerLinkActive="active">Track Shipments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/reports']" routerLinkActive="active">Reports</a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link " [routerLink]="['/sales']" routerLinkActive="active">Sales</a>
+      </li>
+   
+    </ul>
+
+    <div *ngIf="loggedIn()" class="dropdown" dropdown>
+        <a class="  dropdown-toggle text-light" dropdownToggle>
+        Welcome  {{authService.decodedToken?.unique_name}}
+        </a>
+        <div class="dropdown-menu mt-3" *dropdownMenu>
+          <a class="dropdown-item" href="#"><i class="fa fa-user" ></i>Edit Profile</a>
+  
+          <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out" ></i>Logout</a>
+        </div>
+      </div>
+  
+      <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+        <input class="form-control mr-sm-2" type="text" name="username" required placeholder="Username" [(ngModel)]="model.username">
+        <input class="form-control mr-sm-2" type="password" name="password" required placeholder="Password" [(ngModel)]="model.password">
+        <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+      </form>
+  
+</nav>
+
+
+
+
+
+
+
+
+
+<div class="custom" >
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    
+    <mat-card-title >Products</mat-card-title>
+    <mat-card-subtitle>Add new product</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    
+  <form class="form-group" #ProductForm="ngForm"  (ngSubmit)="addProduct()">
+
+    <div class="form-group">
+      <label>Product URL</label>
+      <input type="text" class="form-control" name="url" id="PuRL" name="url" placeholder="Enter Photo URL" [(ngModel)]="ProductAdd.url">
+    </div>
+
+    <div class="form-group" >
+      <label>Product name</label>
+      <input  class="form-control mr-sm-2"  type="text"  name="name" required placeholder="Enter Product Badge Name" [(ngModel)]="ProductAdd.badgeName">
+    </div>
+    <div class="form-group">
+      <label>Product size</label>
+      <input type="text" class="form-control" id="pSize" placeholder="Enter Product Size" name="badgesize" [(ngModel)]="ProductAdd.badgesize">
+    </div>
+    
+    <div class="form-group">
+      <label>Product type</label>
+      <input type="text" class="form-control" id="Ptype" placeholder="Enter Product Type" name="badgetype" [(ngModel)]="ProductAdd.badgeType">
+    </div>
+    <div class="form-group">
+      <label>Production Date</label>
+      <input type="text" class="form-control" id="pdatte" placeholder="Enter Product Production Date" name="proddate" [(ngModel)]="ProductAdd.productionDate">
+    </div>
+    <div class="form-group">
+      <label>Expire Date</label>
+      <input type="text" class="form-control" id="pexxp" placeholder="Enter Product Expire Date" name="expire" [(ngModel)]="ProductAdd.expireDate">
+    </div>
+    <div class="form-group">
+      <label >Usage</label>
+      <input type="text" class="form-control" id="puusage" placeholder="Enter Product Usage" name="usage" [(ngModel)]="ProductAdd.usage">
+    </div>
+    <div class="form-group">
+      <label>Product Description</label>
+      <input type="text" class="form-control" id="pssize" placeholder="Enter Product Description" name="desc" [(ngModel)]="ProductAdd.productDescription">
+    </div>
+
+    <div class="form-group">
+      <label>Product Price</label>
+      <input type="number" class="form-control" id="Priiice" placeholder="Enter Product Price" name="price" [(ngModel)]="ProductAdd.price">
+    </div>
+    
+    <button id="add" type="submit" class="btn btn-primary">Add</button>
+  </form>
+  </mat-card-content>
+
+</mat-card>
+</div>
+
+
+
+
+      <div class="prdouctpart">
+       
+      <div *ngFor="let MyProduct of MyProducts" class="col-lg-6 col-md-6 col-sm-6">
+
+        <app-Products-card [product]="MyProduct"></app-Products-card>
+      
+      </div>
+    </div>
+  
+
